@@ -1,0 +1,1 @@
+CREATE TABLE "org"."user_can_access_collection" ("user_id" integer NOT NULL, "collection_id" integer NOT NULL, PRIMARY KEY ("user_id","collection_id") , FOREIGN KEY ("collection_id") REFERENCES "org"."collection"("id") ON UPDATE cascade ON DELETE cascade, FOREIGN KEY ("user_id") REFERENCES "org"."user"("id") ON UPDATE cascade ON DELETE cascade);

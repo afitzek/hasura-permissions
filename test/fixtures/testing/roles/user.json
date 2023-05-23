@@ -1,0 +1,56 @@
+{
+    "$schema": "../../../contrib/metadata-types/Role.json",
+    "name": "user",
+    "extends": "anonymous",
+    "permissions": {
+        "org": {
+            "user": {
+                "select": {
+                    "columns": [
+                        "id",
+                        "name"
+                    ],
+                    "filter": {
+                        "id": {
+                            "_eq": "X-Hasura-User-Id"
+                        }
+                    }
+                }
+            },
+            "user_can_access_collection": {
+                "select": {
+                    "columns": [
+                        "user_id",
+                        "collection_id"
+                    ],
+                    "filter": {
+                        "user": {
+                            "__ref_permission": "org.user"
+                        }
+                    }
+                }
+            },
+            "collection": {
+                "select": {
+                    "columns": [
+                        "id"
+                    ],
+                    "filter": {
+                        "_or": [
+                            {
+                                "is_public": {
+                                    "_eq": "true"
+                                }
+                            },
+                            {
+                                "user_can_access_collections":{
+                                    "__ref_permission": "org.user_can_access_collection"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

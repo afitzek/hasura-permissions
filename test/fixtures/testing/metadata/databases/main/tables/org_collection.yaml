@@ -1,0 +1,57 @@
+table:
+  schema: org
+  name: collection
+array_relationships:
+  - name: garment_belongs_to_collections
+    using:
+      foreign_key_constraint_on:
+        column: collection_id
+        table:
+          schema: org
+          name: garment_belongs_to_collection
+  - name: user_can_access_collections
+    using:
+      foreign_key_constraint_on:
+        column: collection_id
+        table:
+          schema: org
+          name: user_can_access_collection
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - id
+      filter:
+        is_public:
+          _eq: "true"
+  - role: manager
+    permission:
+      columns:
+        - id
+      filter: {}
+  - role: user
+    permission:
+      columns:
+        - id
+      filter:
+        _or:
+          - is_public:
+              _eq: "true"
+          - user_can_access_collections:
+              user:
+                id:
+                  _eq: X-Hasura-User-Id
+update_permissions:
+  - role: manager
+    permission:
+      columns: "*"
+      filter: {}
+insert_permissions:
+  - role: manager
+    permission:
+      columns: "*"
+      check: {}
+delete_permissions:
+  - role: manager
+    permission:
+      filter: {}

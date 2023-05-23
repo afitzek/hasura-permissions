@@ -1,0 +1,74 @@
+{
+    "$schema": "../../../contrib/metadata-types/Role.json",
+    "name": "manager",
+    "extends": ["user", "anonymous"],
+    "permissions": {
+        "org": {
+            "user_can_access_collection": {
+                "select": {
+                    "columns": [
+                        "user_id",
+                        "collection_id"
+                    ],
+                    "filter": {}
+                },
+                "insert": {
+                    "columns": "*",
+                    "check": {}
+                },
+                "update": {
+                    "columns": "*",
+                    "filter": {}
+                },
+                "delete": {
+                    "filter": {}
+                }
+            },
+            "collection": {
+                "select": {
+                    "columns": [
+                        "id"
+                    ],
+                    "filter": {}
+                },
+                "insert": {
+                    "columns": "*",
+                    "check": {}
+                },
+                "update": {
+                    "columns": "*",
+                    "filter": {}
+                },
+                "delete": {
+                    "filter": {}
+                }
+            },
+            "garment_belongs_to_collection": {
+                "insert": {
+                    "columns": "*",
+                    "check": {}
+                },
+                "update": {
+                    "columns": "*",
+                    "filter": {}
+                },
+                "delete": {
+                    "filter": {}
+                }
+            },
+            "garment": {
+                "insert": {
+                    "columns": "*",
+                    "check": {}
+                },
+                "update": {
+                    "columns": "*",
+                    "filter": {}
+                },
+                "delete": {
+                    "filter": {}
+                }
+            }
+        }
+    }
+}

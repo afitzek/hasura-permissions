@@ -1,0 +1,46 @@
+{
+    "$schema": "../../../contrib/metadata-types/Role.json",
+    "name": "anonymous",
+    "permissions": {
+        "org": {
+            "collection": {
+                "select": {
+                    "columns": [
+                        "id"
+                    ],
+                    "filter": {
+                        "is_public": {
+                            "_eq": "true"
+                        }
+                    }
+                }
+            },
+            "garment_belongs_to_collection": {
+                "select": {
+                    "columns": [
+                        "garment_id",
+                        "collection_id"
+                    ],
+                    "filter": {
+                        "collection": {
+                            "__ref_permission": "org.collection"
+                        }
+                    }
+                }
+            },
+            "garment": {
+                "select": {
+                    "columns": [
+                        "id",
+                        "name"
+                    ],
+                    "filter": {
+                        "garment_belongs_to_collections": {
+                            "__ref_permission": "org.garment_belongs_to_collection"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

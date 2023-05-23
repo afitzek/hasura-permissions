@@ -1,0 +1,7 @@
+table:
+  schema: public
+  name: application
+select_permissions: []
+update_permissions: []
+insert_permissions: []
+delete_permissions: []

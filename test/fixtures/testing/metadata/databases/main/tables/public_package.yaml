@@ -1,0 +1,19 @@
+table:
+  schema: public
+  name: package
+object_relationships:
+  - name: container
+    using:
+      foreign_key_constraint_on: container_id
+array_relationships:
+  - name: tags
+    using:
+      foreign_key_constraint_on:
+        column: package_id
+        table:
+          schema: public
+          name: tag
+select_permissions: []
+update_permissions: []
+insert_permissions: []
+delete_permissions: []

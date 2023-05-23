@@ -1,0 +1,11 @@
+table:
+  schema: public
+  name: tag
+object_relationships:
+  - name: package
+    using:
+      foreign_key_constraint_on: package_id
+select_permissions: []
+update_permissions: []
+insert_permissions: []
+delete_permissions: []

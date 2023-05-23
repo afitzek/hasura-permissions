@@ -1,0 +1,22 @@
+table:
+  schema: public
+  name: container
+array_relationships:
+  - name: packages
+    using:
+      foreign_key_constraint_on:
+        column: container_id
+        table:
+          schema: public
+          name: package
+  - name: user_can_access_containers
+    using:
+      foreign_key_constraint_on:
+        column: container_id
+        table:
+          schema: public
+          name: user_can_access_container
+insert_permissions: []
+select_permissions: []
+update_permissions: []
+delete_permissions: []
