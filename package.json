@@ -2,6 +2,10 @@
   "name": "@afitzek/hasura-permissions",
   "version": "1.0.0",
   "description": "",
+  "private": false,
+  "repository": {
+    "url": "https://github.com/afitzek/hasura-permissions"
+  },
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/main.ts",
@@ -13,8 +17,8 @@
   "bin": {
     "hperm": "./bin/hperm"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Andreas Fitzek",
+  "license": "MIT",
   "dependencies": {
     "@types/lodash": "^4.14.186",
     "@types/node": "^18.7.23",
