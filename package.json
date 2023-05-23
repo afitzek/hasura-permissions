@@ -1,5 +1,5 @@
 {
-  "name": "hasura-permissions",
+  "name": "@afitzek/hasura-permissions",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
