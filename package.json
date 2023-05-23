@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/main.ts",
+    "build": "tsc",
+    "start:bin": "./bin/hperm",
+    "prepack": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "hperm": "./bin/hperm"
   },
   "author": "",
   "license": "ISC",
