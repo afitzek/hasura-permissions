@@ -177,10 +177,10 @@ const augment_metadata = async (hasura_dir: string, roles: Array<Role>): Promise
         }
 
         // reset all permissions
-        tableEntry.select_permissions = [];
-        tableEntry.update_permissions = [];
-        tableEntry.insert_permissions = [];
-        tableEntry.delete_permissions = [];
+        tableEntry.select_permissions = undefined;
+        tableEntry.update_permissions = undefined;
+        tableEntry.insert_permissions = undefined;
+        tableEntry.delete_permissions = undefined;
 
         for (const role of roles) {
             const schemaPermissions = role.permissions[tableEntry.table.schema];
@@ -188,24 +188,36 @@ const augment_metadata = async (hasura_dir: string, roles: Array<Role>): Promise
                 const tablePermissions = schemaPermissions[tableEntry.table.name];
                 if (tablePermissions) {
                     if (tablePermissions.select) {
+                        if(!tableEntry.select_permissions) {
+                            tableEntry.select_permissions = [];
+                        }
                         tableEntry.select_permissions.push({
                             role: role.name,
                             permission: tablePermissions.select
                         });
                     }
                     if (tablePermissions.update) {
+                        if(!tableEntry.update_permissions) {
+                            tableEntry.update_permissions = [];
+                        }
                         tableEntry.update_permissions.push({
                             role: role.name,
                             permission: tablePermissions.update
                         });
                     }
                     if (tablePermissions.insert) {
+                        if(!tableEntry.insert_permissions) {
+                            tableEntry.insert_permissions = [];
+                        }
                         tableEntry.insert_permissions.push({
                             role: role.name,
                             permission: tablePermissions.insert
                         });
                     }
                     if (tablePermissions.delete) {
+                        if(!tableEntry.delete_permissions) {
+                            tableEntry.delete_permissions = [];
+                        }
                         tableEntry.delete_permissions.push({
                             role: role.name,
                             permission: tablePermissions.delete
