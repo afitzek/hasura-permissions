@@ -5,7 +5,6 @@ import { join } from 'path';
 import { JSONPath } from 'jsonpath-plus';
 import * as _ from 'lodash';
 import { program } from 'commander';
-import { terminal } from 'terminal-kit';
 
 interface TablePermission {
     select?: SelectPermission
@@ -245,67 +244,19 @@ const main = async () => {
 extended vocabulary for permissions.`)
         .argument('<dir>', 'The hasura directory')
         .action(async (dir) => {
-            terminal("Generating hasura metadata in ").bold(`${dir}\n\n`);
-            const spinner = await terminal.spinner('dotSpinner');
-            terminal(" Reading roles ...")
+            console.log("Generating hasura metadata in ");
+            console.log(" Reading roles ...")
             await new Promise(r => setTimeout(r, 1000));
             const roles = await read_roles(dir);
-            terminal('\n')
-            spinner.animate(false);
 
-            terminal("\nFound ").bold(`${roles.length}`);
-            terminal(" roles: \n");
-            terminal.table([
-                ['Name'],
-                ...roles.map((v) => {
-                    return [
-                        v.name
-                    ]
-                })
-            ], {
-                hasBorder: true,
-                contentHasMarkup: true,
-                borderChars: 'lightRounded',
-                borderAttr: { color: 'blue' },
-                textAttr: { bgColor: 'default' },
-                firstRowTextAttr: { bold: true, underline: true } ,
-                width: 80,
-                fit: true   // Activate all expand/shrink + wordWrap
-            }
-            );
+            console.log(`Found ${roles.length} roles`);
 
-            terminal('\n')
-            const augment = await terminal.spinner('dotSpinner');
-            terminal(" Generating metadata ...")
+            console.log(" Generating metadata ...")
             const tables = await augment_metadata(dir, roles);
-            terminal('\n')
-            augment.animate(false);
 
-            terminal("\nGenerated ").bold(`${tables.length}`);
+            console.log(`Generated ${tables.length} tables`);
 
-            terminal(' tables\n')
-
-            terminal.table([
-                ['Name'],
-                ...tables.map((v) => {
-                    return [
-                        `${v.table.schema}.${v.table.name}`
-                    ]
-                })
-            ], {
-                hasBorder: true,
-                contentHasMarkup: true,
-                borderChars: 'lightRounded',
-                borderAttr: { color: 'blue' },
-                textAttr: { bgColor: 'default' },
-                firstRowTextAttr: { bold: true, underline: true } ,
-                width: 80,
-                fit: true   // Activate all expand/shrink + wordWrap
-            }
-            );
-            terminal('\n')
-
-            terminal.bold.green("\nAll done\n");
+            console.log("\nAll done\n");
         })
 
     program.parse();
